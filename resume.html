@@ -10,15 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@100..900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- GSAP for Animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-    <!-- Custom Config for Neobrutalism -->
+    <!-- Tailwind Custom Config (must come BEFORE CDN script) -->
     <script>
+        tailwind = window.tailwind || {};
         tailwind.config = {
             theme: {
                 extend: {
@@ -46,13 +40,20 @@
         }
     </script>
 
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
     <style>
         body {
             background-color: #F3F4F6;
             background-image: radial-gradient(#000 1px, transparent 1px);
             background-size: 20px 20px;
             overflow-x: hidden;
-            cursor: none; /* Custom cursor logic below */
+            cursor: none; /* hide default cursor for custom cursor */
         }
 
         /* Custom Scrollbar */
@@ -105,7 +106,7 @@
             width: 40px;
             height: 40px;
             border: 2px solid black;
-            transition: width 0.2s, height 0.2s;
+            transition: width 0.2s, height 0.2s, background-color 0.2s, mix-blend-mode 0.2s;
         }
         
         /* Utility */
@@ -118,6 +119,26 @@
         .hover-lift:hover {
             transform: translate(-4px, -4px);
             box-shadow: 9px 9px 0px 0px #000 !important;
+        }
+
+        /* Extra util classes to match your design */
+        .text-stroke {
+            -webkit-text-stroke: 3px black;
+        }
+        .stroke-text {
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+        .animate-spin-slow {
+            animation: spin 10s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
@@ -146,7 +167,7 @@
         
         <!-- Decorative Background Elements -->
         <div class="absolute top-20 right-[-50px] w-64 h-64 bg-neo-pink rounded-full blur-none brutal-border animate-spin-slow opacity-80 z-0"></div>
-        <div class="absolute bottom-20 left-[-50px] w-48 h-48 bg-neo-blue rect blur-none brutal-border transform rotate-12 z-0"></div>
+        <div class="absolute bottom-20 left-[-50px] w-48 h-48 bg-neo-blue blur-none brutal-border transform rotate-12 z-0"></div>
 
         <div class="max-w-7xl mx-auto w-full px-4 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
@@ -156,7 +177,10 @@
                     <div class="bg-white brutal-border p-8 md:p-12 shadow-hard-xl rotate-1 mb-8 reveal-load">
                         <span class="bg-black text-white px-2 py-1 text-sm font-bold uppercase tracking-widest">Roll No: 2022071053</span>
                         <h1 class="font-mega text-6xl md:text-8xl font-black leading-none mt-4 mb-2 tracking-tighter break-words">
-                            PRIYA <br> <span class="text-stroke text-transparent bg-clip-text bg-gradient-to-r from-neo-pink to-neo-blue" style="-webkit-text-stroke: 3px black;">YADAV</span>
+                            PRIYA <br> 
+                            <span class="text-stroke text-transparent bg-clip-text bg-gradient-to-r from-neo-pink to-neo-blue">
+                                YADAV
+                            </span>
                         </h1>
                         <p class="font-space text-xl md:text-2xl font-bold mt-6 border-l-4 border-black pl-4">
                             Information Technology Student <br>
@@ -305,7 +329,7 @@
                             <span class="bg-neo-pink text-black px-4 py-2 font-bold border-2 border-white hover:bg-white transition-colors cursor-crosshair">C++</span>
                             <span class="bg-neo-blue text-black px-4 py-2 font-bold border-2 border-white hover:bg-white transition-colors cursor-crosshair">Python</span>
                             <span class="bg-neo-green text-black px-4 py-2 font-bold border-2 border-white hover:bg-white transition-colors cursor-crosshair">JavaScript</span>
-                            <span class="bg-transparent text-white px-4 py-2 font-bold border-2 border-white">HTML/CSS</span>
+                            <span class="bg-transparent text-white px-4 py-2 font-bold border-2 border-white cursor-crosshair">HTML/CSS</span>
                         </div>
                     </div>
                     
@@ -397,7 +421,7 @@
                 </div>
 
                 <div class="mt-8 font-mono text-sm font-bold bg-neo-bg inline-block px-4 py-1 border border-black">
-                    +91-7268823057
+                    +91-💖🤗
                 </div>
             </div>
         </section>
@@ -407,10 +431,13 @@
     <footer class="bg-black text-white py-12 border-t-4 border-neo-green">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="font-mega text-2xl">PRIYA.</div>
-            <p class="font-mono text-sm text-gray-400">© 2024. NEORBRUTALISM X RESUME.</p>
-            <div class="bg-neo-green text-black px-4 py-2 font-bold transform -rotate-3 hover:rotate-0 transition-transform">
+            <p class="font-mono text-sm text-gray-400">© 2024. NEOBRUTALISM X RESUME.</p>
+            <button
+                class="bg-neo-green text-black px-4 py-2 font-bold transform -rotate-3 hover:rotate-0 transition-transform"
+                onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+            >
                 SCROLL TO TOP
-            </div>
+            </button>
         </div>
     </footer>
 
@@ -424,29 +451,33 @@
             const posX = e.clientX;
             const posY = e.clientY;
 
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
+            if (!cursorDot || !cursorOutline) return;
 
-            // Adding a slight delay to the outline for fluid feel
-            cursorOutline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
+            cursorDot.style.left = posX + "px";
+            cursorDot.style.top = posY + "px";
+
+            cursorOutline.animate(
+                {
+                    left: posX + "px",
+                    top: posY + "px"
+                },
+                { duration: 500, fill: "forwards" }
+            );
         });
 
         // Hover effect for cursor
-        document.querySelectorAll('a, button, .cursor-crosshair').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursorOutline.style.width = '60px';
-                cursorOutline.style.height = '60px';
-                cursorOutline.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-                cursorOutline.style.mixBlendMode = 'difference';
+        document.querySelectorAll("a, button, .cursor-crosshair").forEach((el) => {
+            el.addEventListener("mouseenter", () => {
+                cursorOutline.style.width = "60px";
+                cursorOutline.style.height = "60px";
+                cursorOutline.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
+                cursorOutline.style.mixBlendMode = "difference";
             });
-            el.addEventListener('mouseleave', () => {
-                cursorOutline.style.width = '40px';
-                cursorOutline.style.height = '40px';
-                cursorOutline.style.backgroundColor = 'transparent';
-                cursorOutline.style.mixBlendMode = 'normal';
+            el.addEventListener("mouseleave", () => {
+                cursorOutline.style.width = "40px";
+                cursorOutline.style.height = "40px";
+                cursorOutline.style.backgroundColor = "transparent";
+                cursorOutline.style.mixBlendMode = "normal";
             });
         });
 
@@ -463,7 +494,7 @@
         });
 
         // Project Cards Pop-in
-        gsap.utils.toArray('.gsap-project-card').forEach((card, i) => {
+        gsap.utils.toArray(".gsap-project-card").forEach((card, i) => {
             gsap.from(card, {
                 scrollTrigger: {
                     trigger: card,
@@ -479,11 +510,11 @@
         });
 
         // General Fade Up
-        gsap.utils.toArray('.gsap-fade-up').forEach((el) => {
+        gsap.utils.toArray(".gsap-fade-up").forEach((el) => {
             gsap.from(el, {
                 scrollTrigger: {
                     trigger: el,
-                    start: "top 80%",
+                    start: "top 80%"
                 },
                 y: 30,
                 opacity: 0,
@@ -491,7 +522,6 @@
                 ease: "power2.out"
             });
         });
-
     </script>
 </body>
 </html>
